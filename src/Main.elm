@@ -100,17 +100,17 @@ view model =
             [ input [ value model.input, onInput Input ] []
             , button [ disabled (String.length model.input < 1) ] [ text "Submit" ]
             ]
-        , ul [] (List.map todoViewComponent model.memos)
+        , ul [] (List.map todoListComponent model.memos)
         ]
 
 
-todoViewComponent : Todo -> Html Msg
-todoViewComponent todo =
-    li [] [ labelComponent todo ]
+todoListComponent : Todo -> Html Msg
+todoListComponent todo =
+    li [] [ todoComponent todo ]
 
 
-labelComponent : Todo -> Html Msg
-labelComponent todo =
+todoComponent : Todo -> Html Msg
+todoComponent todo =
     div []
         [ label
             [ if todo.done then
