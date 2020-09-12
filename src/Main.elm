@@ -98,14 +98,27 @@ view model =
     div []
         [ h1 [ class "text-6xl font-black" ] [ text "Elm TODO" ]
         , Html.form
-            [ onSubmit Submit ]
+            [ class "flex flex-row"
+            , onSubmit Submit
+            ]
             [ input
-                [ class "bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+                [ class "bg-white focus:outline-none focus:shadow-outline border-4 border-blue-800 rounded-r-none rounded-l-lg py-2 px-4 block w-full appearance-none leading-normal"
                 , value model.input
                 , onInput Input
                 ]
                 []
-            , button [ disabled (String.length model.input < 1) ] [ text "Submit" ]
+            , button
+                [ class "bg-blue-900 text-white font-bold py-2 px-4 rounded-r-lg rounded-l-none"
+                , class
+                    (if String.length model.input > 0 then
+                        "hover:bg-blue-800"
+
+                     else
+                        "opacity-75 cursor-not-allowed"
+                    )
+                , disabled (String.length model.input == 0)
+                ]
+                [ text "Submit" ]
             ]
         , ul [] (List.map todoListComponent model.memos)
         ]
