@@ -96,8 +96,15 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ Html.form [ onSubmit Submit ]
-            [ input [ value model.input, onInput Input ] []
+        [ h1 [ class "text-6xl font-black" ] [ text "Elm TODO" ]
+        , Html.form
+            [ onSubmit Submit ]
+            [ input
+                [ class "bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-2 px-4 block w-full appearance-none leading-normal"
+                , value model.input
+                , onInput Input
+                ]
+                []
             , button [ disabled (String.length model.input < 1) ] [ text "Submit" ]
             ]
         , ul [] (List.map todoListComponent model.memos)
