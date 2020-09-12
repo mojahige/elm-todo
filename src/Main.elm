@@ -22,7 +22,7 @@ main =
 type alias Todo =
     { id : Int
     , text : String
-    , done : Bool
+    , completed : Bool
     }
 
 
@@ -69,7 +69,7 @@ update msg model =
                 , memos =
                     { id = model.id
                     , text = model.input
-                    , done = False
+                    , completed = False
                     }
                         :: model.memos
             }
@@ -83,7 +83,7 @@ update msg model =
             let
                 updateMemos memo =
                     if memo.id == id then
-                        { memo | done = checked }
+                        { memo | completed = checked }
 
                     else
                         memo
@@ -169,14 +169,14 @@ todoComponent todo =
             [ class "flex items-center mr-auto text-2xl font-bold" ]
             [ input
                 [ type_ "checkbox"
-                , checked todo.done
-                , onClick (Check todo.id (not todo.done))
+                , checked todo.completed
+                , onClick (Check todo.id (not todo.completed))
                 ]
                 []
             , span
                 [ class "ml-2"
                 , class
-                    (if todo.done then
+                    (if todo.completed then
                         "line-through"
 
                      else
